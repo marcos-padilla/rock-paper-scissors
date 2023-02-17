@@ -18,7 +18,7 @@
         <img src="./assets/scissors.png" />
       </div>
     </div>
-    <button class="reset-button">Reset</button>
+    <button class="reset-button" @click="reset()">Reset</button>
   </div>
 </template>
 
@@ -100,7 +100,13 @@ export default {
       }
       this.timeout = setTimeout(() => {
         this.result = null
-      }, 2000)
+      }, 4000)
+    },
+    reset() {
+      this.playerPoints = 0
+      this.cpuPoints = 0
+      this.timeout = null
+      this.result = null
     }
   }
 }
