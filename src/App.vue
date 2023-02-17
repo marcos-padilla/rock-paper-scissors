@@ -1,6 +1,17 @@
 
+
+
 <template>
   <div>
-    <h1>Hello world</h1>
+    <PointsComponent />
   </div>
 </template>
+
+<script>
+import PointsComponent from './components/PointsComponent.vue';
+export default {
+  components: {
+    PointsComponent
+  }
+}
+</script>
