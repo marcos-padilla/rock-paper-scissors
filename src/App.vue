@@ -3,18 +3,18 @@
 
 <template>
   <div class="page">
-    <PointsComponent />
+    <PointsComponent :playerPoints="playerPoints" :cpuPoints="cpuPoints" />
     <span v-if="result" :style="{ color: result.color }">
       {{ result.text }}
     </span>
     <div class="buttons">
-      <div class="button">
+      <div class="button" @click="play('rock')">
         <img src="./assets/rock.png" />
       </div>
-      <div class="button">
+      <div class="button" @click="play('paper')">
         <img src="./assets/paper.png" />
       </div>
-      <div class="button">
+      <div class="button" @click="play('scissors')">
         <img src="./assets/scissors.png" />
       </div>
     </div>
@@ -61,7 +61,7 @@ import PointsComponent from './components/PointsComponent.vue';
 const results = {
   player: { text: 'Player win', color: 'blue' },
   cpu: { text: 'CPU win', color: 'red' },
-  tie: { text: 'tie', color: 'rgb(3, 197, 3)' },
+  tie: { text: 'Tie', color: 'rgb(3, 197, 3)' },
 }
 export default {
   components: {
@@ -69,8 +69,38 @@ export default {
   },
   data() {
     return {
+      result: null,
+      playerPoints: 0,
+      cpuPoints: 0,
+      timeout: null
+    }
+  },
+  methods: {
+    play(playerOption) {
 
-      result: results.cpu
+      if (this.timeout) {
+        clearTimeout(this.timeout)
+        this.timeout = null
+      }
+
+      const options = ["rock", "paper", "scissors"];
+      const machineOption = options[Math.floor(Math.random() * options.length)];
+      if (playerOption === machineOption) {
+        this.result = results.tie;
+      } else if (
+        (playerOption === "rock" && machineOption === "scissors") ||
+        (playerOption === "paper" && machineOption === "rock") ||
+        (playerOption === "scissors" && machineOption === "paper")
+      ) {
+        this.result = results.player;
+        this.playerPoints++
+      } else {
+        this.result = results.cpu;
+        this.cpuPoints++
+      }
+      this.timeout = setTimeout(() => {
+        this.result = null
+      }, 2000)
     }
   }
 }

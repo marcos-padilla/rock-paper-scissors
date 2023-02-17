@@ -2,12 +2,12 @@
     <div class="data">
         <div>
             <div class="badge user">User</div>
-            <span>0</span>
+            <span>{{ playerPoints }}</span>
         </div>
         <div class="division" />
         <div>
             <div class="badge cpu">CPU</div>
-            <span>0</span>
+            <span>{{ cpuPoints }}</span>
         </div>
     </div>
 </template>
@@ -49,8 +49,8 @@ span {
 <script>
 export default {
     props: {
-        player: Number,
-        cpu: Number
+        playerPoints: Number,
+        cpuPoints: Number
     }
 }
 </script>
