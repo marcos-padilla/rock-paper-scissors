@@ -108,6 +108,20 @@ export default {
       this.timeout = null
       this.result = null
     }
+  },
+  created() {
+
+    try {
+      this.cpuPoints = JSON.parse(localStorage.getItem('cpuPoints')) || 0
+      this.playerPoints = JSON.parse(localStorage.getItem('playerPoints')) || 0
+    } catch (e) {
+      this.cpuPoints = 0
+      this.playerPoints = 0
+    }
+  },
+  updated() {
+    localStorage.setItem('cpuPoints', JSON.stringify(this.cpuPoints))
+    localStorage.setItem('playerPoints', JSON.stringify(this.playerPoints))
   }
 }
 </script>
